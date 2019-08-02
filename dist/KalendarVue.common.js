@@ -8059,8 +8059,7 @@ var kalendar_weekview = __webpack_require__("f611");
 
 
 
-
-window.crypto = window.crypto || window.msCrypto; // IE11 Polyfill
+ // window.crypto = window.crypto || window.msCrypto; // IE11 Polyfill
 // Install the components
 
 function install(Vue) {
