@@ -106,6 +106,7 @@ for (let util of Object.keys(Utils)) {
 }
 
 Vue.use(PortalVue);
+Vue.prototype.$kalendar = {};
 
 const crypto = window.crypto || window.msCrypto; // IE11 Polyfill
 

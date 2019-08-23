@@ -9,7 +9,6 @@ import KalendarWeekView from './kalendar-weekview';
 
 // Install the components
 export function install(Vue) {
-	Vue.prototype.$kalendar = {};
 	Vue.component('kalendar', Kalendar);
 	Vue.component('kalendar-cell', KalendarCell);
 	Vue.component('kalendar-day', KalendarDay);

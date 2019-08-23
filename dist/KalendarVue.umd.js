@@ -7977,7 +7977,7 @@ var portal_vue_default = /*#__PURE__*/__webpack_require__.n(portal_vue);
 var smoothscroll = __webpack_require__("7707");
 var smoothscroll_default = /*#__PURE__*/__webpack_require__.n(smoothscroll);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09a70edd-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-container.vue?vue&type=template&id=53fcf652&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09a70edd-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-container.vue?vue&type=template&id=45c1c2a9&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"kalendar-wrapper",class:{
           'no-scroll': !_vm.scrollable,
           'gstyle': _vm.kalendar_options.style === 'material_design',
@@ -7986,7 +7986,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/kalendar/kalendar-container.vue?vue&type=template&id=53fcf652&
+// CONCATENATED MODULE: ./src/components/kalendar/kalendar-container.vue?vue&type=template&id=45c1c2a9&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -8180,6 +8180,7 @@ for (var _i = 0, _Object$keys = Object.keys(utils["a" /* default */]); _i < _Obj
 }
 
 external_commonjs_vue_commonjs2_vue_root_Vue_default.a.use(portal_vue_default.a);
+external_commonjs_vue_commonjs2_vue_root_Vue_default.a.prototype.$kalendar = {};
 var kalendar_containervue_type_script_lang_js_crypto = window.crypto || window.msCrypto; // IE11 Polyfill
 
 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; // we are going to use web workers to do the heavy lifting
@@ -8520,7 +8521,6 @@ var kalendar_weekview = __webpack_require__("f611");
 // Install the components
 
 function install(Vue) {
-  Vue.prototype.$kalendar = {};
   Vue.component('kalendar', kalendar_container);
   Vue.component('kalendar-cell', kalendar_cell["default"]);
   Vue.component('kalendar-day', kalendar_day["a" /* default */]);
