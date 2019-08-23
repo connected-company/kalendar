@@ -92,10 +92,7 @@ const getDayDateID = (date) => {
 }
 
 const getLocaleTime = (dateString) => {
-  let [date, hour] = new Date(dateString);
-    .split(', ');
-  date = date.split('/').reverse().join('-');
-  return `${date}T${hour}.000Z`;
+  return new Date(dateString).toISOString();
 }
 
 const addTimezoneInfo = (ISOdate) => {

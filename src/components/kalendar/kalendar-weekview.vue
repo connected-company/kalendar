@@ -103,7 +103,7 @@ export default {
 
       let label = time.split('T')[1].slice(0, 5);
       if (this.kalendar_options.military_time) {
-        let ampm = formatAMPM(getLocaleTime(time));
+        let ampm = formatAMPM(time);
         let ampmlabel = ampm.slice(-2);
       }
       let distance = ((new Date(time) - new Date(day_starts)) / 1000) / 60;

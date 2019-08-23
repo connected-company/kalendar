@@ -81,525 +81,10 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "006a");
+/******/ 	return __webpack_require__(__webpack_require__.s = "e4b7");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "006a":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
-var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
-var es6_object_keys = __webpack_require__("456d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
-var web_dom_iterable = __webpack_require__("ac6a");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
-var define_property = __webpack_require__("85f2");
-var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    define_property_default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-// EXTERNAL MODULE: ./node_modules/promise-worker/register.js
-var register = __webpack_require__("a692");
-var register_default = /*#__PURE__*/__webpack_require__.n(register);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
-var is_array = __webpack_require__("a745");
-var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithHoles.js
-
-function _arrayWithHoles(arr) {
-  if (is_array_default()(arr)) return arr;
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
-var get_iterator = __webpack_require__("5d73");
-var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArrayLimit.js
-
-function _iterableToArrayLimit(arr, i) {
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = get_iterator_default()(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableRest.js
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js
-
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.typed.uint8-array.js
-var es6_typed_uint8_array = __webpack_require__("34ef");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
-var es6_regexp_to_string = __webpack_require__("6b54");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.string.pad-start.js
-var es7_string_pad_start = __webpack_require__("f576");
-
-// CONCATENATED MODULE: ./src/components/kalendar/utils.js
-
-
-
-
-
-
-var creators_offset = new Date().getTimezoneOffset() / 60;
-
-if (creators_offset * -1 >= 0) {
-  creators_offset *= -1;
-  creators_offset = "".concat((creators_offset + '').padStart(2, '0'), ":00");
-  creators_offset = "+".concat(creators_offset);
-} else {
-  creators_offset = "".concat((creators_offset + '').padStart(2, '0'), ":00");
-  creators_offset = "-".concat(creators_offset);
-}
-
-var getHourlessDate = function getHourlessDate(date_string) {
-  var today = date_string ? new Date(date_string) : new Date();
-  var year = today.getFullYear() + '',
-      month = (today.getMonth() + 1 + '').padStart(2, 0),
-      day = (today.getDate() + '').padStart(2, 0);
-  return "".concat(year, "-").concat(month, "-").concat(day, "T00:00:00.000Z");
-};
-
-var getDatelessHour = function getDatelessHour(date_string, military) {
-  var time = addTimezoneInfo(date_string);
-  if (military) return utils_getLocaleTime(time).slice(11, 16);
-  return formatAMPM(new Date(utils_getLocaleTime(time)));
-};
-
-var getYearMonthDay = function getYearMonthDay(date_string) {
-  return getHourlessDate(date_string).slice(0, 10);
-};
-
-var getUTCDate = function getUTCDate() {
-  var date_string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Date.now();
-  var date = new Date(date_string);
-  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-};
-
-var addDays = function addDays(date, days) {
-  var dateObj = new Date(date);
-  dateObj.setUTCHours(0, 0, 0, 0);
-  dateObj.setDate(dateObj.getDate() + days);
-  return dateObj;
-};
-
-var addMinutes = function addMinutes(date, minutes) {
-  return new Date(date.getTime() + minutes * 60000);
-};
-
-var addHours = function addHours(date, hours) {
-  return addMinutes(date, hours * 60);
-};
-
-var startOfWeek = function startOfWeek(date) {
-  var d = new Date(date);
-  var day = d.getDay(),
-      diff = d.getDate() - day;
-  return new Date(d.setDate(diff));
-};
-
-var endOfWeek = function endOfWeek(date) {
-  var dateObj = new Date(date);
-  dateObj.setUTCHours(0, 0, 0, 0);
-  var toAdd = 6 - dateObj.getDay();
-  return addDays(dateObj, toAdd);
-};
-
-var isMobile = function isMobile() {
-  var check = false;
-
-  (function (a) {
-    if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
-  })(navigator.userAgent || navigator.vendor || window.opera);
-
-  return check;
-};
-
-var generateUUID = function generateUUID() {
-  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
-    return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
-  });
-};
-
-var cloneObject = function cloneObject(object) {
-  return JSON.parse(JSON.stringify(object));
-};
-
-var getDayDateID = function getDayDateID(date) {
-  var year = "".concat(date.getUTCFullYear());
-  var month = "".concat(date.getUTCMonth()).padStart(2, 0);
-  var day = "".concat(date.getUTCDate()).padStart(2, 0);
-  return "".concat(year, "-").concat(month, "-").concat(day);
-};
-
-var utils_getLocaleTime = function getLocaleTime(dateString) {
-  var _toLocaleString$split = new Date(dateString).toLocaleString('en-GB').split(', '),
-      _toLocaleString$split2 = _slicedToArray(_toLocaleString$split, 2),
-      date = _toLocaleString$split2[0],
-      hour = _toLocaleString$split2[1];
-
-  date = date.split('/').reverse().join('-');
-  return "".concat(date, "T").concat(hour, ".000Z");
-};
-
-var addTimezoneInfo = function addTimezoneInfo(ISOdate) {
-  if (new Date(ISOdate).toISOString() !== ISOdate) return;
-  return "".concat(ISOdate.slice(0, 19)).concat(creators_offset);
-};
-
-var isToday = function isToday(date) {
-  if (!date) return;
-  var today = utils_getLocaleTime(new Date()).slice(0, 10);
-  return date.slice(0, 10) === today;
-};
-
-var isBefore = function isBefore(date1, date2) {
-  if (!date1 || !date2) return;
-  return new Date(date1) < new Date(date2);
-};
-
-var isWeekend = function isWeekend(date) {
-  if (!date) return;
-  var day = new Date(date).getDay();
-  return day === 6 || day === 0;
-};
-
-var formatAMPM = function formatAMPM(date) {
-  var hours = date.getUTCHours();
-  var result = "".concat(hours % 12 === 0 ? 12 : hours % 12, " ").concat(hours >= 12 ? 'PM' : 'AM');
-  return result;
-};
-
-/* harmony default export */ var utils = ({
-  addDays: addDays,
-  addMinutes: addMinutes,
-  addHours: addHours,
-  startOfWeek: startOfWeek,
-  endOfWeek: endOfWeek,
-  isMobile: isMobile,
-  generateUUID: generateUUID,
-  cloneObject: cloneObject,
-  addTimezoneInfo: addTimezoneInfo,
-  getHourlessDate: getHourlessDate,
-  getDatelessHour: getDatelessHour,
-  getYearMonthDay: getYearMonthDay,
-  getLocaleTime: utils_getLocaleTime,
-  isToday: isToday,
-  isBefore: isBefore,
-  isWeekend: isWeekend,
-  formatAMPM: formatAMPM
-});
-// CONCATENATED MODULE: ./src/components/kalendar/hours.js
-/* harmony default export */ var kalendar_hours = ({
-  getAllHours: function getAllHours() {
-    return ["00:00:00", "00:10:00", "00:20:00", "00:30:00", "00:40:00", "00:50:00", "01:00:00", "01:10:00", "01:20:00", "01:30:00", "01:40:00", "01:50:00", "02:00:00", "02:10:00", "02:20:00", "02:30:00", "02:40:00", "02:50:00", "03:00:00", "03:10:00", "03:20:00", "03:30:00", "03:40:00", "03:50:00", "04:00:00", "04:10:00", "04:20:00", "04:30:00", "04:40:00", "04:50:00", "05:00:00", "05:10:00", "05:20:00", "05:30:00", "05:40:00", "05:50:00", "06:00:00", "06:10:00", "06:20:00", "06:30:00", "06:40:00", "06:50:00", "07:00:00", "07:10:00", "07:20:00", "07:30:00", "07:40:00", "07:50:00", "08:00:00", "08:10:00", "08:20:00", "08:30:00", "08:40:00", "08:50:00", "09:00:00", "09:10:00", "09:20:00", "09:30:00", "09:40:00", "09:50:00", "10:00:00", "10:10:00", "10:20:00", "10:30:00", "10:40:00", "10:50:00", "11:00:00", "11:10:00", "11:20:00", "11:30:00", "11:40:00", "11:50:00", "12:00:00", "12:10:00", "12:20:00", "12:30:00", "12:40:00", "12:50:00", "13:00:00", "13:10:00", "13:20:00", "13:30:00", "13:40:00", "13:50:00", "14:00:00", "14:10:00", "14:20:00", "14:30:00", "14:40:00", "14:50:00", "15:00:00", "15:10:00", "15:20:00", "15:30:00", "15:40:00", "15:50:00", "16:00:00", "16:10:00", "16:20:00", "16:30:00", "16:40:00", "16:50:00", "17:00:00", "17:10:00", "17:20:00", "17:30:00", "17:40:00", "17:50:00", "18:00:00", "18:10:00", "18:20:00", "18:30:00", "18:40:00", "18:50:00", "19:00:00", "19:10:00", "19:20:00", "19:30:00", "19:40:00", "19:50:00", "20:00:00", "20:10:00", "20:20:00", "20:30:00", "20:40:00", "20:50:00", "21:00:00", "21:10:00", "21:20:00", "21:30:00", "21:40:00", "21:50:00", "22:00:00", "22:10:00", "22:20:00", "22:30:00", "22:40:00", "22:50:00", "23:00:00", "23:10:00", "23:20:00", "23:30:00", "23:40:00", "23:50:00", "24:00:00"];
-  },
-  getFullHours: function getFullHours() {
-    return ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00", "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"];
-  }
-});
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./src/components/kalendar/workers/worker.js
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
-
-var worker_generateUUID = utils.generateUUID,
-    worker_addDays = utils.addDays,
-    worker_addMinutes = utils.addMinutes,
-    worker_addHours = utils.addHours,
-    worker_getYearMonthDay = utils.getYearMonthDay,
-    worker_getLocaleTime = utils.getLocaleTime;
-
-register_default()(function (message) {
-  var type = message.type,
-      data = message.data;
-
-  if (type === 'message') {
-    return "Worker replies: ".concat(new Date().toISOString());
-  }
-
-  switch (type) {
-    case 'getDays':
-      return getDays(data.day, data.options);
-
-    case 'getHours':
-      return getHours(data.hourOptions);
-
-    case 'getDayCells':
-      return worker_getDayCells(data.day, data.hourOptions);
-
-    case 'constructDayEvents':
-      return constructDayEvents(data.day, data.events);
-
-    case 'constructNewEvent':
-      return constructNewEvent(data.event);
-  }
-});
-
-function getDays(dayString, _ref) {
-  var hide_dates = _ref.hide_dates,
-      hide_days = _ref.hide_days,
-      view_type = _ref.view_type;
-  var date = new Date("".concat(dayString, "T00:00:00.000Z"));
-  var day_of_week = date.getUTCDay() - 1;
-  var days = [];
-
-  if (view_type === 'day') {
-    days = [{
-      value: date.toISOString(),
-      index: 0
-    }];
-  } else {
-    for (var idx = 0; idx < 7; idx++) {
-      days.push({
-        value: worker_addDays(date, idx - day_of_week).toISOString(),
-        index: idx
-      });
-    }
-  }
-
-  if (hide_dates && hide_dates.length > 0) {
-    days = days.filter(function (_ref2) {
-      var value = _ref2.value;
-      return hide_dates.indexOf(value.slice(0, 10)) < 0;
-    });
-  }
-
-  if (hide_days && hide_days.length > 0) {
-    days = days.filter(function (_ref3) {
-      var index = _ref3.index;
-      return hide_days.indexOf(index) < 0;
-    });
-  }
-
-  return days;
-}
-
-function getHours(day_options) {
-  var date = new Date();
-  date.setUTCHours(0, 0, 0, 0);
-  var iso_date = worker_getYearMonthDay(date);
-  var day_hours = kalendar_hours.getFullHours();
-
-  if (day_options) {
-    var start_hour = day_options.start_hour,
-        end_hour = day_options.end_hour;
-    day_hours = day_hours.slice(start_hour, end_hour);
-  }
-
-  var hours = [];
-
-  for (var idx = 0; idx < day_hours.length; idx++) {
-    var value = "".concat(iso_date, "T").concat(day_hours[idx], ".000Z");
-    hours.push({
-      value: value,
-      index: idx,
-      visible: true
-    });
-  }
-
-  return hours;
-}
-
-var worker_getDayCells = function getDayCells(dayString, day_options) {
-  if (new Date(dayString).toISOString() !== dayString) {
-    throw new Error('Unsupported dayString parameter provided');
-  }
-
-  ;
-  var cells = [];
-  var date_part = dayString.slice(0, 10);
-  var all_hours = kalendar_hours.getAllHours();
-
-  if (day_options) {
-    var start_hour = day_options.start_hour,
-        end_hour = day_options.end_hour;
-    var start_index = start_hour * 6;
-    var end_index = end_hour * 6 + 1;
-    all_hours = all_hours.slice(start_index, end_index);
-  }
-
-  for (var hourIdx = 0; hourIdx < all_hours.length; hourIdx++) {
-    var hour = all_hours[hourIdx];
-    var value = "".concat(date_part, "T").concat(hour, ".000Z");
-    cells.push({
-      value: value,
-      index: hourIdx,
-      visible: true
-    });
-  }
-
-  return cells;
-};
-
-var constructDayEvents = function constructDayEvents(day, existing_events) {
-  var events_for_this_day = existing_events.map(function (event) {
-    var from = event.from,
-        to = event.to;
-    from = worker_getLocaleTime(from);
-    to = worker_getLocaleTime(to);
-    return _objectSpread({}, event, {
-      from: from,
-      to: to
-    });
-  }).filter(function (_ref4) {
-    var from = _ref4.from;
-    return from.slice(0, 10) === day.slice(0, 10);
-  });
-  if (events_for_this_day.length === 0) return {};
-  var filtered_events = {};
-  events_for_this_day.forEach(function (event) {
-    var constructedEvent = constructNewEvent(event);
-    var key = constructedEvent.key;
-
-    if (filtered_events.hasOwnProperty(key)) {
-      filtered_events[key].push(constructedEvent);
-    } else {
-      filtered_events[key] = [constructedEvent];
-    }
-  });
-  return filtered_events;
-};
-
-var constructNewEvent = function constructNewEvent(event) {
-  var from = event.from,
-      to = event.to;
-  from = new Date(from);
-  to = new Date(to);
-  from.setUTCSeconds(0, 0);
-  to.setUTCSeconds(0, 0);
-  var from_value = from.toISOString();
-  var masked_from = new Date(from.getTime());
-  var masked_to = new Date(to.getTime());
-  var fromData = {
-    value: from_value,
-    masked_value: masked_from.toISOString(),
-    rounded: false,
-    round_offset: null
-  };
-  var to_value = to.toISOString();
-  var toData = {
-    value: to_value,
-    masked_value: masked_to.toISOString(),
-    rounded: false,
-    round_offset: null
-  };
-
-  var multipleOf10 = function multipleOf10(dateStr) {
-    return new Date(dateStr).getMinutes() % 10;
-  };
-
-  if (multipleOf10(fromData.value) !== 0) {
-    fromData.rounded = true;
-    fromData.round_offset = multipleOf10(fromData.value);
-    var minutes = new Date(fromData.value).getMinutes();
-    var maskedMinutes = Math.floor(minutes / 10) * 10;
-    masked_from.setMinutes(maskedMinutes);
-    fromData.masked_value = masked_from.toISOString();
-  }
-
-  var eventKey = masked_from.toISOString(); // 1 minute equals 1 pixel in our view. That means we need to find the length
-  // of the event by finding out the difference in minutes 
-
-  var diffInMs = to - from;
-  var diffInHrs = Math.floor(diffInMs % 86400000 / 3600000);
-  var diffMins = Math.round(diffInMs % 86400000 % 3600000 / 60000);
-  var constructedEvent = {
-    start: fromData,
-    end: toData,
-    data: event.data,
-    id: event.id || worker_generateUUID(),
-    distance: diffMins + diffInHrs * 60,
-    status: 'completed',
-    key: eventKey
-  };
-  console.log('Constructed event:', constructedEvent);
-  return constructedEvent;
-};
-/**
- * @param {int} The month number, 0 based
- * @param {int} The year, not zero based, required to account for leap years
- * @return {Date[]} List with date objects for each day of the month
- */
-
-
-var getDaysInMonth = function getDaysInMonth(month, year) {
-  var date = new Date(year, month, 1);
-  var days = [];
-
-  while (date.getMonth() === month) {
-    days.push(new Date(date));
-    date.setDate(date.getDate() + 1);
-  }
-
-  return days;
-};
-
-/***/ }),
 
 /***/ "01f9":
 /***/ (function(module, exports, __webpack_require__) {
@@ -867,20 +352,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "0fc9":
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__("3a38");
-var max = Math.max;
-var min = Math.min;
-module.exports = function (index, length) {
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-
-/***/ }),
-
 /***/ "1169":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -932,53 +403,6 @@ module.exports = __webpack_require__("9e1e") ? Object.defineProperties : functio
   while (length > i) dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
-
-
-/***/ }),
-
-/***/ "1654":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $at = __webpack_require__("71c1")(true);
-
-// 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__("30f1")(String, 'String', function (iterated) {
-  this._t = String(iterated); // target
-  this._i = 0;                // next index
-// 21.1.5.2.1 %StringIteratorPrototype%.next()
-}, function () {
-  var O = this._t;
-  var index = this._i;
-  var point;
-  if (index >= O.length) return { value: undefined, done: true };
-  point = $at(O, index);
-  this._i += point.length;
-  return { value: point, done: false };
-});
-
-
-/***/ }),
-
-/***/ "1691":
-/***/ (function(module, exports) {
-
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-
-/***/ }),
-
-/***/ "1af6":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
-var $export = __webpack_require__("63b6");
-
-$export($export.S, 'Array', { isArray: __webpack_require__("9003") });
 
 
 /***/ }),
@@ -1164,30 +588,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "241e":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__("25eb");
-module.exports = function (it) {
-  return Object(defined(it));
-};
-
-
-/***/ }),
-
-/***/ "25eb":
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-
-/***/ }),
-
 /***/ "2621":
 /***/ (function(module, exports) {
 
@@ -1207,148 +607,6 @@ module.exports = __webpack_require__("8378").getIteratorMethod = function (it) {
     || it['@@iterator']
     || Iterators[classof(it)];
 };
-
-
-/***/ }),
-
-/***/ "28a5":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isRegExp = __webpack_require__("aae3");
-var anObject = __webpack_require__("cb7c");
-var speciesConstructor = __webpack_require__("ebd6");
-var advanceStringIndex = __webpack_require__("0390");
-var toLength = __webpack_require__("9def");
-var callRegExpExec = __webpack_require__("5f1b");
-var regexpExec = __webpack_require__("520a");
-var fails = __webpack_require__("79e5");
-var $min = Math.min;
-var $push = [].push;
-var $SPLIT = 'split';
-var LENGTH = 'length';
-var LAST_INDEX = 'lastIndex';
-var MAX_UINT32 = 0xffffffff;
-
-// babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
-var SUPPORTS_Y = !fails(function () { RegExp(MAX_UINT32, 'y'); });
-
-// @@split logic
-__webpack_require__("214f")('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
-  var internalSplit;
-  if (
-    'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
-    'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
-    'ab'[$SPLIT](/(?:ab)*/)[LENGTH] != 2 ||
-    '.'[$SPLIT](/(.?)(.?)/)[LENGTH] != 4 ||
-    '.'[$SPLIT](/()()/)[LENGTH] > 1 ||
-    ''[$SPLIT](/.?/)[LENGTH]
-  ) {
-    // based on es5-shim implementation, need to rework it
-    internalSplit = function (separator, limit) {
-      var string = String(this);
-      if (separator === undefined && limit === 0) return [];
-      // If `separator` is not a regex, use native split
-      if (!isRegExp(separator)) return $split.call(string, separator, limit);
-      var output = [];
-      var flags = (separator.ignoreCase ? 'i' : '') +
-                  (separator.multiline ? 'm' : '') +
-                  (separator.unicode ? 'u' : '') +
-                  (separator.sticky ? 'y' : '');
-      var lastLastIndex = 0;
-      var splitLimit = limit === undefined ? MAX_UINT32 : limit >>> 0;
-      // Make `global` and avoid `lastIndex` issues by working with a copy
-      var separatorCopy = new RegExp(separator.source, flags + 'g');
-      var match, lastIndex, lastLength;
-      while (match = regexpExec.call(separatorCopy, string)) {
-        lastIndex = separatorCopy[LAST_INDEX];
-        if (lastIndex > lastLastIndex) {
-          output.push(string.slice(lastLastIndex, match.index));
-          if (match[LENGTH] > 1 && match.index < string[LENGTH]) $push.apply(output, match.slice(1));
-          lastLength = match[0][LENGTH];
-          lastLastIndex = lastIndex;
-          if (output[LENGTH] >= splitLimit) break;
-        }
-        if (separatorCopy[LAST_INDEX] === match.index) separatorCopy[LAST_INDEX]++; // Avoid an infinite loop
-      }
-      if (lastLastIndex === string[LENGTH]) {
-        if (lastLength || !separatorCopy.test('')) output.push('');
-      } else output.push(string.slice(lastLastIndex));
-      return output[LENGTH] > splitLimit ? output.slice(0, splitLimit) : output;
-    };
-  // Chakra, V8
-  } else if ('0'[$SPLIT](undefined, 0)[LENGTH]) {
-    internalSplit = function (separator, limit) {
-      return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
-    };
-  } else {
-    internalSplit = $split;
-  }
-
-  return [
-    // `String.prototype.split` method
-    // https://tc39.github.io/ecma262/#sec-string.prototype.split
-    function split(separator, limit) {
-      var O = defined(this);
-      var splitter = separator == undefined ? undefined : separator[SPLIT];
-      return splitter !== undefined
-        ? splitter.call(separator, O, limit)
-        : internalSplit.call(String(O), separator, limit);
-    },
-    // `RegExp.prototype[@@split]` method
-    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@split
-    //
-    // NOTE: This cannot be properly polyfilled in engines that don't support
-    // the 'y' flag.
-    function (regexp, limit) {
-      var res = maybeCallNative(internalSplit, regexp, this, limit, internalSplit !== $split);
-      if (res.done) return res.value;
-
-      var rx = anObject(regexp);
-      var S = String(this);
-      var C = speciesConstructor(rx, RegExp);
-
-      var unicodeMatching = rx.unicode;
-      var flags = (rx.ignoreCase ? 'i' : '') +
-                  (rx.multiline ? 'm' : '') +
-                  (rx.unicode ? 'u' : '') +
-                  (SUPPORTS_Y ? 'y' : 'g');
-
-      // ^(? + rx + ) is needed, in combination with some S slicing, to
-      // simulate the 'y' flag.
-      var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
-      var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
-      if (lim === 0) return [];
-      if (S.length === 0) return callRegExpExec(splitter, S) === null ? [S] : [];
-      var p = 0;
-      var q = 0;
-      var A = [];
-      while (q < S.length) {
-        splitter.lastIndex = SUPPORTS_Y ? q : 0;
-        var z = callRegExpExec(splitter, SUPPORTS_Y ? S : S.slice(q));
-        var e;
-        if (
-          z === null ||
-          (e = $min(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
-        ) {
-          q = advanceStringIndex(S, q, unicodeMatching);
-        } else {
-          A.push(S.slice(p, q));
-          if (A.length === lim) return A;
-          for (var i = 1; i <= z.length - 1; i++) {
-            A.push(z[i]);
-            if (A.length === lim) return A;
-          }
-          q = p = e;
-        }
-      }
-      A.push(S.slice(p));
-      return A;
-    }
-  ];
-});
 
 
 /***/ }),
@@ -1514,83 +772,6 @@ module.exports = function (that, maxLength, fillString, left) {
 
 /***/ }),
 
-/***/ "30f1":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var LIBRARY = __webpack_require__("b8e3");
-var $export = __webpack_require__("63b6");
-var redefine = __webpack_require__("9138");
-var hide = __webpack_require__("35e8");
-var Iterators = __webpack_require__("481b");
-var $iterCreate = __webpack_require__("8f60");
-var setToStringTag = __webpack_require__("45f2");
-var getPrototypeOf = __webpack_require__("53e2");
-var ITERATOR = __webpack_require__("5168")('iterator');
-var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
-var FF_ITERATOR = '@@iterator';
-var KEYS = 'keys';
-var VALUES = 'values';
-
-var returnThis = function () { return this; };
-
-module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
-  $iterCreate(Constructor, NAME, next);
-  var getMethod = function (kind) {
-    if (!BUGGY && kind in proto) return proto[kind];
-    switch (kind) {
-      case KEYS: return function keys() { return new Constructor(this, kind); };
-      case VALUES: return function values() { return new Constructor(this, kind); };
-    } return function entries() { return new Constructor(this, kind); };
-  };
-  var TAG = NAME + ' Iterator';
-  var DEF_VALUES = DEFAULT == VALUES;
-  var VALUES_BUG = false;
-  var proto = Base.prototype;
-  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-  var $default = $native || getMethod(DEFAULT);
-  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
-  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
-  var methods, key, IteratorPrototype;
-  // Fix native
-  if ($anyNative) {
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
-    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
-      // Set @@toStringTag to native iterators
-      setToStringTag(IteratorPrototype, TAG, true);
-      // fix for some old engines
-      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
-    }
-  }
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if (DEF_VALUES && $native && $native.name !== VALUES) {
-    VALUES_BUG = true;
-    $default = function values() { return $native.call(this); };
-  }
-  // Define iterator
-  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
-    hide(proto, ITERATOR, $default);
-  }
-  // Plug for library
-  Iterators[NAME] = $default;
-  Iterators[TAG] = returnThis;
-  if (DEFAULT) {
-    methods = {
-      values: DEF_VALUES ? $default : getMethod(VALUES),
-      keys: IS_SET ? $default : getMethod(KEYS),
-      entries: $entries
-    };
-    if (FORCED) for (key in methods) {
-      if (!(key in proto)) redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-  }
-  return methods;
-};
-
-
-/***/ }),
-
 /***/ "32e9":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1601,28 +782,6 @@ module.exports = __webpack_require__("9e1e") ? function (object, key, value) {
 } : function (object, key, value) {
   object[key] = value;
   return object;
-};
-
-
-/***/ }),
-
-/***/ "32fc":
-/***/ (function(module, exports, __webpack_require__) {
-
-var document = __webpack_require__("e53d").document;
-module.exports = document && document.documentElement;
-
-
-/***/ }),
-
-/***/ "335c":
-/***/ (function(module, exports, __webpack_require__) {
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__("6b4c");
-// eslint-disable-next-line no-prototype-builtins
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return cof(it) == 'String' ? it.split('') : Object(it);
 };
 
 
@@ -1693,19 +852,6 @@ module.exports = function fill(value /* , start = 0, end = @length */) {
 
 /***/ }),
 
-/***/ "36c3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__("335c");
-var defined = __webpack_require__("25eb");
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-
-/***/ }),
-
 /***/ "3846":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1733,49 +879,6 @@ module.exports = Object.getPrototypeOf || function (O) {
   if (typeof O.constructor == 'function' && O instanceof O.constructor) {
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
-};
-
-
-/***/ }),
-
-/***/ "3a38":
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-
-/***/ }),
-
-/***/ "40c3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__("6b4c");
-var TAG = __webpack_require__("5168")('toStringTag');
-// ES3 wrong here
-var ARG = cof(function () { return arguments; }()) == 'Arguments';
-
-// fallback for IE11 Script Access Denied error
-var tryGet = function (it, key) {
-  try {
-    return it[key];
-  } catch (e) { /* empty */ }
-};
-
-module.exports = function (it) {
-  var O, T, B;
-  return it === undefined ? 'Undefined' : it === null ? 'Null'
-    // @@toStringTag case
-    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
-    // builtinTag case
-    : ARG ? cof(O)
-    // ES3 arguments fallback
-    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
 
 
@@ -1843,20 +946,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "45f2":
-/***/ (function(module, exports, __webpack_require__) {
-
-var def = __webpack_require__("d9f6").f;
-var has = __webpack_require__("07e3");
-var TAG = __webpack_require__("5168")('toStringTag');
-
-module.exports = function (it, tag, stat) {
-  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
-};
-
-
-/***/ }),
-
 /***/ "4630":
 /***/ (function(module, exports) {
 
@@ -1872,30 +961,12 @@ module.exports = function (bitmap, value) {
 
 /***/ }),
 
-/***/ "469f":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("6c1c");
-__webpack_require__("1654");
-module.exports = __webpack_require__("7d7b");
-
-
-/***/ }),
-
 /***/ "46a7":
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__("63b6");
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 $export($export.S + $export.F * !__webpack_require__("8e60"), 'Object', { defineProperty: __webpack_require__("d9f6").f });
-
-
-/***/ }),
-
-/***/ "481b":
-/***/ (function(module, exports) {
-
-module.exports = {};
 
 
 /***/ }),
@@ -1908,34 +979,6 @@ var defined = __webpack_require__("be13");
 module.exports = function (it) {
   return Object(defined(it));
 };
-
-
-/***/ }),
-
-/***/ "50ed":
-/***/ (function(module, exports) {
-
-module.exports = function (done, value) {
-  return { value: value, done: !!done };
-};
-
-
-/***/ }),
-
-/***/ "5168":
-/***/ (function(module, exports, __webpack_require__) {
-
-var store = __webpack_require__("dbdb")('wks');
-var uid = __webpack_require__("62a0");
-var Symbol = __webpack_require__("e53d").Symbol;
-var USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function (name) {
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
 
 
 /***/ }),
@@ -2014,26 +1057,6 @@ exports.f = {}.propertyIsEnumerable;
 
 /***/ }),
 
-/***/ "53e2":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has = __webpack_require__("07e3");
-var toObject = __webpack_require__("241e");
-var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
-var ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function (O) {
-  O = toObject(O);
-  if (has(O, IE_PROTO)) return O[IE_PROTO];
-  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-
-
-/***/ }),
-
 /***/ "5537":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2053,53 +1076,11 @@ var store = global[SHARED] || (global[SHARED] = {});
 
 /***/ }),
 
-/***/ "5559":
-/***/ (function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__("dbdb")('keys');
-var uid = __webpack_require__("62a0");
-module.exports = function (key) {
-  return shared[key] || (shared[key] = uid(key));
-};
-
-
-/***/ }),
-
 /***/ "584a":
 /***/ (function(module, exports) {
 
 var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "5b4e":
-/***/ (function(module, exports, __webpack_require__) {
-
-// false -> Array#indexOf
-// true  -> Array#includes
-var toIObject = __webpack_require__("36c3");
-var toLength = __webpack_require__("b447");
-var toAbsoluteIndex = __webpack_require__("0fc9");
-module.exports = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIObject($this);
-    var length = toLength(O.length);
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
-    if (IS_INCLUDES && el != el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare
-      if (value != value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
-      if (O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
 
 
 /***/ }),
@@ -2183,13 +1164,6 @@ module.exports = function (exec, skipClosing) {
 
 /***/ }),
 
-/***/ "5d73":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("469f");
-
-/***/ }),
-
 /***/ "5eda":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2256,18 +1230,6 @@ var cof = __webpack_require__("2d95");
 // eslint-disable-next-line no-prototype-builtins
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-
-/***/ }),
-
-/***/ "62a0":
-/***/ (function(module, exports) {
-
-var id = 0;
-var px = Math.random();
-module.exports = function (key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
 
 
@@ -2385,18 +1347,6 @@ module.exports = function (it, S) {
 
 /***/ }),
 
-/***/ "6b4c":
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
-};
-
-
-/***/ }),
-
 /***/ "6b54":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2426,56 +1376,6 @@ if (__webpack_require__("79e5")(function () { return $toString.call({ source: 'a
     return $toString.call(this);
   });
 }
-
-
-/***/ }),
-
-/***/ "6c1c":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("c367");
-var global = __webpack_require__("e53d");
-var hide = __webpack_require__("35e8");
-var Iterators = __webpack_require__("481b");
-var TO_STRING_TAG = __webpack_require__("5168")('toStringTag');
-
-var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
-  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
-  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
-  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
-  'TextTrackList,TouchList').split(',');
-
-for (var i = 0; i < DOMIterables.length; i++) {
-  var NAME = DOMIterables[i];
-  var Collection = global[NAME];
-  var proto = Collection && Collection.prototype;
-  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
-  Iterators[NAME] = Iterators.Array;
-}
-
-
-/***/ }),
-
-/***/ "71c1":
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__("3a38");
-var defined = __webpack_require__("25eb");
-// true  -> String#at
-// false -> String#codePointAt
-module.exports = function (TO_STRING) {
-  return function (that, pos) {
-    var s = String(defined(that));
-    var i = toInteger(pos);
-    var l = s.length;
-    var a, b;
-    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
-};
 
 
 /***/ }),
@@ -2563,55 +1463,6 @@ module.exports = function (KEY) {
 
 /***/ }),
 
-/***/ "7cd6":
-/***/ (function(module, exports, __webpack_require__) {
-
-var classof = __webpack_require__("40c3");
-var ITERATOR = __webpack_require__("5168")('iterator');
-var Iterators = __webpack_require__("481b");
-module.exports = __webpack_require__("584a").getIteratorMethod = function (it) {
-  if (it != undefined) return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-
-
-/***/ }),
-
-/***/ "7d7b":
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__("e4ae");
-var get = __webpack_require__("7cd6");
-module.exports = __webpack_require__("584a").getIterator = function (it) {
-  var iterFn = get(it);
-  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
-  return anObject(iterFn.call(it));
-};
-
-
-/***/ }),
-
-/***/ "7e90":
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP = __webpack_require__("d9f6");
-var anObject = __webpack_require__("e4ae");
-var getKeys = __webpack_require__("c3a1");
-
-module.exports = __webpack_require__("8e60") ? Object.defineProperties : function defineProperties(O, Properties) {
-  anObject(O);
-  var keys = getKeys(Properties);
-  var length = keys.length;
-  var i = 0;
-  var P;
-  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
-  return O;
-};
-
-
-/***/ }),
-
 /***/ "7f20":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2631,14 +1482,6 @@ module.exports = function (it, tag, stat) {
 
 var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "8436":
-/***/ (function(module, exports) {
-
-module.exports = function () { /* empty */ };
 
 
 /***/ }),
@@ -2721,39 +1564,6 @@ $export($export.S, 'Object', {
 
 /***/ }),
 
-/***/ "8f60":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var create = __webpack_require__("a159");
-var descriptor = __webpack_require__("aebd");
-var setToStringTag = __webpack_require__("45f2");
-var IteratorPrototype = {};
-
-// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__("35e8")(IteratorPrototype, __webpack_require__("5168")('iterator'), function () { return this; });
-
-module.exports = function (Constructor, NAME, next) {
-  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
-  setToStringTag(Constructor, NAME + ' Iterator');
-};
-
-
-/***/ }),
-
-/***/ "9003":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.2.2 IsArray(argument)
-var cof = __webpack_require__("6b4c");
-module.exports = Array.isArray || function isArray(arg) {
-  return cof(arg) == 'Array';
-};
-
-
-/***/ }),
-
 /***/ "9093":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2764,14 +1574,6 @@ var hiddenKeys = __webpack_require__("e11e").concat('length', 'prototype');
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
 };
-
-
-/***/ }),
-
-/***/ "9138":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("35e8");
 
 
 /***/ }),
@@ -2874,54 +1676,6 @@ module.exports = function (it) {
 module.exports = !__webpack_require__("79e5")(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
-
-
-/***/ }),
-
-/***/ "a159":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__("e4ae");
-var dPs = __webpack_require__("7e90");
-var enumBugKeys = __webpack_require__("1691");
-var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
-var Empty = function () { /* empty */ };
-var PROTOTYPE = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function () {
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__("1ec9")('iframe');
-  var i = enumBugKeys.length;
-  var lt = '<';
-  var gt = '>';
-  var iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__("32fc").appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties) {
-  var result;
-  if (O !== null) {
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty();
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
 
 
 /***/ }),
@@ -3149,28 +1903,6 @@ module.exports = registerPromiseWorker
 
 /***/ }),
 
-/***/ "a745":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("f410");
-
-/***/ }),
-
-/***/ "aae3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.2.8 IsRegExp(argument)
-var isObject = __webpack_require__("d3f4");
-var cof = __webpack_require__("2d95");
-var MATCH = __webpack_require__("2b4c")('match');
-module.exports = function (it) {
-  var isRegExp;
-  return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
-};
-
-
-/***/ }),
-
 /***/ "ac6a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3268,27 +2000,6 @@ __webpack_require__("5ca1")({
 
 /***/ }),
 
-/***/ "b447":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.15 ToLength
-var toInteger = __webpack_require__("3a38");
-var min = Math.min;
-module.exports = function (it) {
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-
-
-/***/ }),
-
-/***/ "b8e3":
-/***/ (function(module, exports) {
-
-module.exports = true;
-
-
-/***/ }),
-
 /***/ "ba92":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3360,62 +2071,6 @@ module.exports = function (IS_INCLUDES) {
       if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
-};
-
-
-/***/ }),
-
-/***/ "c367":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var addToUnscopables = __webpack_require__("8436");
-var step = __webpack_require__("50ed");
-var Iterators = __webpack_require__("481b");
-var toIObject = __webpack_require__("36c3");
-
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__("30f1")(Array, 'Array', function (iterated, kind) {
-  this._t = toIObject(iterated); // target
-  this._i = 0;                   // next index
-  this._k = kind;                // kind
-// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-}, function () {
-  var O = this._t;
-  var kind = this._k;
-  var index = this._i++;
-  if (!O || index >= O.length) {
-    this._t = undefined;
-    return step(1);
-  }
-  if (kind == 'keys') return step(0, index);
-  if (kind == 'values') return step(0, O[index]);
-  return step(0, [index, O[index]]);
-}, 'values');
-
-// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-Iterators.Arguments = Iterators.Array;
-
-addToUnscopables('keys');
-addToUnscopables('values');
-addToUnscopables('entries');
-
-
-/***/ }),
-
-/***/ "c3a1":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__("e6f3");
-var enumBugKeys = __webpack_require__("1691");
-
-module.exports = Object.keys || function keys(O) {
-  return $keys(O, enumBugKeys);
 };
 
 
@@ -3615,25 +2270,6 @@ exports.f = __webpack_require__("8e60") ? Object.defineProperty : function defin
 
 /***/ }),
 
-/***/ "dbdb":
-/***/ (function(module, exports, __webpack_require__) {
-
-var core = __webpack_require__("584a");
-var global = __webpack_require__("e53d");
-var SHARED = '__core-js_shared__';
-var store = global[SHARED] || (global[SHARED] = {});
-
-(module.exports = function (key, value) {
-  return store[key] || (store[key] = value !== undefined ? value : {});
-})('versions', []).push({
-  version: core.version,
-  mode: __webpack_require__("b8e3") ? 'pure' : 'global',
-  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
-});
-
-
-/***/ }),
-
 /***/ "dcbc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3669,6 +2305,462 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "e4b7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
+var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("456d");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
+var web_dom_iterable = __webpack_require__("ac6a");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
+var define_property = __webpack_require__("85f2");
+var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    define_property_default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+// EXTERNAL MODULE: ./node_modules/promise-worker/register.js
+var register = __webpack_require__("a692");
+var register_default = /*#__PURE__*/__webpack_require__.n(register);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.typed.uint8-array.js
+var es6_typed_uint8_array = __webpack_require__("34ef");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
+var es6_regexp_to_string = __webpack_require__("6b54");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.string.pad-start.js
+var es7_string_pad_start = __webpack_require__("f576");
+
+// CONCATENATED MODULE: ./src/components/kalendar/utils.js
+
+
+
+
+var creators_offset = new Date().getTimezoneOffset() / 60;
+
+if (creators_offset * -1 >= 0) {
+  creators_offset *= -1;
+  creators_offset = "".concat((creators_offset + '').padStart(2, '0'), ":00");
+  creators_offset = "+".concat(creators_offset);
+} else {
+  creators_offset = "".concat((creators_offset + '').padStart(2, '0'), ":00");
+  creators_offset = "-".concat(creators_offset);
+}
+
+var getHourlessDate = function getHourlessDate(date_string) {
+  var today = date_string ? new Date(date_string) : new Date();
+  var year = today.getFullYear() + '',
+      month = (today.getMonth() + 1 + '').padStart(2, 0),
+      day = (today.getDate() + '').padStart(2, 0);
+  return "".concat(year, "-").concat(month, "-").concat(day, "T00:00:00.000Z");
+};
+
+var getDatelessHour = function getDatelessHour(date_string, military) {
+  var time = addTimezoneInfo(date_string);
+  if (military) return getLocaleTime(time).slice(11, 16);
+  return formatAMPM(new Date(getLocaleTime(time)));
+};
+
+var getYearMonthDay = function getYearMonthDay(date_string) {
+  return getHourlessDate(date_string).slice(0, 10);
+};
+
+var getUTCDate = function getUTCDate() {
+  var date_string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Date.now();
+  var date = new Date(date_string);
+  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+};
+
+var addDays = function addDays(date, days) {
+  var dateObj = new Date(date);
+  dateObj.setUTCHours(0, 0, 0, 0);
+  dateObj.setDate(dateObj.getDate() + days);
+  return dateObj;
+};
+
+var addMinutes = function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes * 60000);
+};
+
+var addHours = function addHours(date, hours) {
+  return addMinutes(date, hours * 60);
+};
+
+var startOfWeek = function startOfWeek(date) {
+  var d = new Date(date);
+  var day = d.getDay(),
+      diff = d.getDate() - day;
+  return new Date(d.setDate(diff));
+};
+
+var endOfWeek = function endOfWeek(date) {
+  var dateObj = new Date(date);
+  dateObj.setUTCHours(0, 0, 0, 0);
+  var toAdd = 6 - dateObj.getDay();
+  return addDays(dateObj, toAdd);
+};
+
+var isMobile = function isMobile() {
+  var check = false;
+
+  (function (a) {
+    if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+  })(navigator.userAgent || navigator.vendor || window.opera);
+
+  return check;
+};
+
+var generateUUID = function generateUUID() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+    return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+  });
+};
+
+var cloneObject = function cloneObject(object) {
+  return JSON.parse(JSON.stringify(object));
+};
+
+var getDayDateID = function getDayDateID(date) {
+  var year = "".concat(date.getUTCFullYear());
+  var month = "".concat(date.getUTCMonth()).padStart(2, 0);
+  var day = "".concat(date.getUTCDate()).padStart(2, 0);
+  return "".concat(year, "-").concat(month, "-").concat(day);
+};
+
+var getLocaleTime = function getLocaleTime(dateString) {
+  return new Date(dateString).toISOString();
+};
+
+var addTimezoneInfo = function addTimezoneInfo(ISOdate) {
+  if (new Date(ISOdate).toISOString() !== ISOdate) return;
+  return "".concat(ISOdate.slice(0, 19)).concat(creators_offset);
+};
+
+var isToday = function isToday(date) {
+  if (!date) return;
+  var today = getLocaleTime(new Date()).slice(0, 10);
+  return date.slice(0, 10) === today;
+};
+
+var isBefore = function isBefore(date1, date2) {
+  if (!date1 || !date2) return;
+  return new Date(date1) < new Date(date2);
+};
+
+var isWeekend = function isWeekend(date) {
+  if (!date) return;
+  var day = new Date(date).getDay();
+  return day === 6 || day === 0;
+};
+
+var formatAMPM = function formatAMPM(date) {
+  var hours = date.getUTCHours();
+  var result = "".concat(hours % 12 === 0 ? 12 : hours % 12, " ").concat(hours >= 12 ? 'PM' : 'AM');
+  return result;
+};
+
+/* harmony default export */ var utils = ({
+  addDays: addDays,
+  addMinutes: addMinutes,
+  addHours: addHours,
+  startOfWeek: startOfWeek,
+  endOfWeek: endOfWeek,
+  isMobile: isMobile,
+  generateUUID: generateUUID,
+  cloneObject: cloneObject,
+  addTimezoneInfo: addTimezoneInfo,
+  getHourlessDate: getHourlessDate,
+  getDatelessHour: getDatelessHour,
+  getYearMonthDay: getYearMonthDay,
+  getLocaleTime: getLocaleTime,
+  isToday: isToday,
+  isBefore: isBefore,
+  isWeekend: isWeekend,
+  formatAMPM: formatAMPM
+});
+// CONCATENATED MODULE: ./src/components/kalendar/hours.js
+/* harmony default export */ var kalendar_hours = ({
+  getAllHours: function getAllHours() {
+    return ["00:00:00", "00:10:00", "00:20:00", "00:30:00", "00:40:00", "00:50:00", "01:00:00", "01:10:00", "01:20:00", "01:30:00", "01:40:00", "01:50:00", "02:00:00", "02:10:00", "02:20:00", "02:30:00", "02:40:00", "02:50:00", "03:00:00", "03:10:00", "03:20:00", "03:30:00", "03:40:00", "03:50:00", "04:00:00", "04:10:00", "04:20:00", "04:30:00", "04:40:00", "04:50:00", "05:00:00", "05:10:00", "05:20:00", "05:30:00", "05:40:00", "05:50:00", "06:00:00", "06:10:00", "06:20:00", "06:30:00", "06:40:00", "06:50:00", "07:00:00", "07:10:00", "07:20:00", "07:30:00", "07:40:00", "07:50:00", "08:00:00", "08:10:00", "08:20:00", "08:30:00", "08:40:00", "08:50:00", "09:00:00", "09:10:00", "09:20:00", "09:30:00", "09:40:00", "09:50:00", "10:00:00", "10:10:00", "10:20:00", "10:30:00", "10:40:00", "10:50:00", "11:00:00", "11:10:00", "11:20:00", "11:30:00", "11:40:00", "11:50:00", "12:00:00", "12:10:00", "12:20:00", "12:30:00", "12:40:00", "12:50:00", "13:00:00", "13:10:00", "13:20:00", "13:30:00", "13:40:00", "13:50:00", "14:00:00", "14:10:00", "14:20:00", "14:30:00", "14:40:00", "14:50:00", "15:00:00", "15:10:00", "15:20:00", "15:30:00", "15:40:00", "15:50:00", "16:00:00", "16:10:00", "16:20:00", "16:30:00", "16:40:00", "16:50:00", "17:00:00", "17:10:00", "17:20:00", "17:30:00", "17:40:00", "17:50:00", "18:00:00", "18:10:00", "18:20:00", "18:30:00", "18:40:00", "18:50:00", "19:00:00", "19:10:00", "19:20:00", "19:30:00", "19:40:00", "19:50:00", "20:00:00", "20:10:00", "20:20:00", "20:30:00", "20:40:00", "20:50:00", "21:00:00", "21:10:00", "21:20:00", "21:30:00", "21:40:00", "21:50:00", "22:00:00", "22:10:00", "22:20:00", "22:30:00", "22:40:00", "22:50:00", "23:00:00", "23:10:00", "23:20:00", "23:30:00", "23:40:00", "23:50:00", "24:00:00"];
+  },
+  getFullHours: function getFullHours() {
+    return ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00", "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"];
+  }
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./src/components/kalendar/workers/worker.js
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+var worker_generateUUID = utils.generateUUID,
+    worker_addDays = utils.addDays,
+    worker_addMinutes = utils.addMinutes,
+    worker_addHours = utils.addHours,
+    worker_getYearMonthDay = utils.getYearMonthDay,
+    worker_getLocaleTime = utils.getLocaleTime;
+
+register_default()(function (message) {
+  var type = message.type,
+      data = message.data;
+
+  if (type === 'message') {
+    return "Worker replies: ".concat(new Date().toISOString());
+  }
+
+  switch (type) {
+    case 'getDays':
+      return getDays(data.day, data.options);
+
+    case 'getHours':
+      return getHours(data.hourOptions);
+
+    case 'getDayCells':
+      return worker_getDayCells(data.day, data.hourOptions);
+
+    case 'constructDayEvents':
+      return constructDayEvents(data.day, data.events);
+
+    case 'constructNewEvent':
+      return constructNewEvent(data.event);
+  }
+});
+
+function getDays(dayString, _ref) {
+  var hide_dates = _ref.hide_dates,
+      hide_days = _ref.hide_days,
+      view_type = _ref.view_type;
+  var date = new Date("".concat(dayString, "T00:00:00.000Z"));
+  var day_of_week = date.getUTCDay() - 1;
+  var days = [];
+
+  if (view_type === 'day') {
+    days = [{
+      value: date.toISOString(),
+      index: 0
+    }];
+  } else {
+    for (var idx = 0; idx < 7; idx++) {
+      days.push({
+        value: worker_addDays(date, idx - day_of_week).toISOString(),
+        index: idx
+      });
+    }
+  }
+
+  if (hide_dates && hide_dates.length > 0) {
+    days = days.filter(function (_ref2) {
+      var value = _ref2.value;
+      return hide_dates.indexOf(value.slice(0, 10)) < 0;
+    });
+  }
+
+  if (hide_days && hide_days.length > 0) {
+    days = days.filter(function (_ref3) {
+      var index = _ref3.index;
+      return hide_days.indexOf(index) < 0;
+    });
+  }
+
+  return days;
+}
+
+function getHours(day_options) {
+  var date = new Date();
+  date.setUTCHours(0, 0, 0, 0);
+  var iso_date = worker_getYearMonthDay(date);
+  var day_hours = kalendar_hours.getFullHours();
+
+  if (day_options) {
+    var start_hour = day_options.start_hour,
+        end_hour = day_options.end_hour;
+    day_hours = day_hours.slice(start_hour, end_hour);
+  }
+
+  var hours = [];
+
+  for (var idx = 0; idx < day_hours.length; idx++) {
+    var value = "".concat(iso_date, "T").concat(day_hours[idx], ".000Z");
+    hours.push({
+      value: value,
+      index: idx,
+      visible: true
+    });
+  }
+
+  return hours;
+}
+
+var worker_getDayCells = function getDayCells(dayString, day_options) {
+  if (new Date(dayString).toISOString() !== dayString) {
+    throw new Error('Unsupported dayString parameter provided');
+  }
+
+  ;
+  var cells = [];
+  var date_part = dayString.slice(0, 10);
+  var all_hours = kalendar_hours.getAllHours();
+
+  if (day_options) {
+    var start_hour = day_options.start_hour,
+        end_hour = day_options.end_hour;
+    var start_index = start_hour * 6;
+    var end_index = end_hour * 6 + 1;
+    all_hours = all_hours.slice(start_index, end_index);
+  }
+
+  for (var hourIdx = 0; hourIdx < all_hours.length; hourIdx++) {
+    var hour = all_hours[hourIdx];
+    var value = "".concat(date_part, "T").concat(hour, ".000Z");
+    cells.push({
+      value: value,
+      index: hourIdx,
+      visible: true
+    });
+  }
+
+  return cells;
+};
+
+var constructDayEvents = function constructDayEvents(day, existing_events) {
+  var events_for_this_day = existing_events.map(function (event) {
+    var from = event.from,
+        to = event.to;
+    from = worker_getLocaleTime(from);
+    to = worker_getLocaleTime(to);
+    return _objectSpread({}, event, {
+      from: from,
+      to: to
+    });
+  }).filter(function (_ref4) {
+    var from = _ref4.from;
+    return from.slice(0, 10) === day.slice(0, 10);
+  });
+  if (events_for_this_day.length === 0) return {};
+  var filtered_events = {};
+  events_for_this_day.forEach(function (event) {
+    var constructedEvent = constructNewEvent(event);
+    var key = constructedEvent.key;
+
+    if (filtered_events.hasOwnProperty(key)) {
+      filtered_events[key].push(constructedEvent);
+    } else {
+      filtered_events[key] = [constructedEvent];
+    }
+  });
+  return filtered_events;
+};
+
+var constructNewEvent = function constructNewEvent(event) {
+  var from = event.from,
+      to = event.to;
+  from = new Date(from);
+  to = new Date(to);
+  from.setUTCSeconds(0, 0);
+  to.setUTCSeconds(0, 0);
+  var from_value = from.toISOString();
+  var masked_from = new Date(from.getTime());
+  var masked_to = new Date(to.getTime());
+  var fromData = {
+    value: from_value,
+    masked_value: masked_from.toISOString(),
+    rounded: false,
+    round_offset: null
+  };
+  var to_value = to.toISOString();
+  var toData = {
+    value: to_value,
+    masked_value: masked_to.toISOString(),
+    rounded: false,
+    round_offset: null
+  };
+
+  var multipleOf10 = function multipleOf10(dateStr) {
+    return new Date(dateStr).getMinutes() % 10;
+  };
+
+  if (multipleOf10(fromData.value) !== 0) {
+    fromData.rounded = true;
+    fromData.round_offset = multipleOf10(fromData.value);
+    var minutes = new Date(fromData.value).getMinutes();
+    var maskedMinutes = Math.floor(minutes / 10) * 10;
+    masked_from.setMinutes(maskedMinutes);
+    fromData.masked_value = masked_from.toISOString();
+  }
+
+  var eventKey = masked_from.toISOString(); // 1 minute equals 1 pixel in our view. That means we need to find the length
+  // of the event by finding out the difference in minutes
+
+  var diffInMs = to - from;
+  var diffInHrs = Math.floor(diffInMs % 86400000 / 3600000);
+  var diffMins = Math.round(diffInMs % 86400000 % 3600000 / 60000);
+  var constructedEvent = {
+    start: fromData,
+    end: toData,
+    data: event.data,
+    id: event.id || worker_generateUUID(),
+    distance: diffMins + diffInHrs * 60,
+    status: 'completed',
+    key: eventKey
+  };
+  return constructedEvent;
+};
+/**
+ * @param {int} The month number, 0 based
+ * @param {int} The year, not zero based, required to account for leap years
+ * @return {Date[]} List with date objects for each day of the month
+ */
+
+
+var getDaysInMonth = function getDaysInMonth(month, year) {
+  var date = new Date(year, month, 1);
+  var days = [];
+
+  while (date.getMonth() === month) {
+    days.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+
+  return days;
+};
+
+/***/ }),
+
 /***/ "e53d":
 /***/ (function(module, exports) {
 
@@ -3678,30 +2770,6 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   // eslint-disable-next-line no-new-func
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "e6f3":
-/***/ (function(module, exports, __webpack_require__) {
-
-var has = __webpack_require__("07e3");
-var toIObject = __webpack_require__("36c3");
-var arrayIndexOf = __webpack_require__("5b4e")(false);
-var IE_PROTO = __webpack_require__("5559")('IE_PROTO');
-
-module.exports = function (object, names) {
-  var O = toIObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (has(O, key = names[i++])) {
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
 
 
 /***/ }),
@@ -4533,15 +3601,6 @@ module.exports = function (object, index, value) {
 
 /***/ }),
 
-/***/ "f410":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("1af6");
-module.exports = __webpack_require__("584a").Array.isArray;
-
-
-/***/ }),
-
 /***/ "f576":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4604,4 +3663,4 @@ module.exports = document && document.documentElement;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=dacfadf539b0a7b6cdb9.worker.js.map
+//# sourceMappingURL=54fdc426a3eeb17ed069.worker.js.map
