@@ -5,7 +5,7 @@
       @mouseup="mouseUp()"
       class="kalendar-cell"
       :class="{
-      'selected': selected, 
+      'selected': selected,
       'is-an-hour': (index+1)%(60/10) === 0,
       'has-events': cell_events && cell_events.length > 0,
       'being-created': !!being_created || hasPopups

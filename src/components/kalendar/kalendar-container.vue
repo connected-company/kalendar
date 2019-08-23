@@ -1,8 +1,8 @@
 <template>
   <div class="kalendar-wrapper"
        :class="{
-            'no-scroll': !scrollable, 
-            'gstyle': kalendar_options.style === 'material_design', 
+            'no-scroll': !scrollable,
+            'gstyle': kalendar_options.style === 'material_design',
             'day-view': kalendar_options.view_type === 'day',
     }"
        @touchstart="scrollable = false"
@@ -86,7 +86,7 @@
             class="slotable">
       <div slot-scope="information"
            class="created-event">
-        <slot name="details-card"
+        <slot name="created-card"
               :event_information="information">
           <h4 style="margin-bottom: 5px">{{information.title}}</h4>
           <p>{{information.description}}</p>
@@ -212,6 +212,10 @@ export default {
         hide_days: val => Array.isArray(val) && !val.find(n => typeof n !== 'number'),
         overlap: val => typeof val === 'boolean',
         past_event_creation: val => typeof val === 'boolean',
+        formatLeftHours: val => typeof val === 'function',
+        formatDayTitle: val => typeof val === 'function',
+        formatWeekNavigator: val => typeof val === 'function',
+        formatDayNavigator: val => typeof val === 'function',
       };
       for (let key in provided_props) {
         if (conditions.hasOwnProperty(key) && conditions[key](provided_props[key])) {

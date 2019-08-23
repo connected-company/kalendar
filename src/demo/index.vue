@@ -1,5 +1,5 @@
 <template>
-  <div class="calendarium">
+  <div>
     <quick-intro></quick-intro>
     <add-manual-event v-if="adding_manually"
                       @close="adding_manually = false"
@@ -19,7 +19,7 @@
                 :key="kalendarRenderId"
                 class="generate-shadow">
         <!-- CREATED CARD SLOT -->
-        <div slot="details-card"
+        <div slot="created-card"
              slot-scope="{ event_information }"
              class="details-card">
           <h4 class="appointment-title">{{event_information.data.title}}</h4>
@@ -71,7 +71,7 @@
                     @click="closePopups()">
               Cancel
             </button>
-            <button @click="addAppointment(popup_information)">
+            <button @click="addEvent(popup_information)">
               Save
             </button>
           </div>
@@ -182,13 +182,14 @@ export default {
       cell_height: 10,
       scrollToNow: false,
       current_day: currentDay,
+      style: 'material_design',
       military_time: false,
       read_only: false,
       day_starts_at: 0,
       day_ends_at: 24,
       overlap: true,
       hide_dates: ['2019-10-31'],
-      hide_days: [0, 6],
+      hide_days: [6],
       past_event_creation: true
     },
     outline_slots: false,
@@ -200,7 +201,7 @@ export default {
     getHours(start, end) {
       return `${format(start, 'hh:mm A')} - ${format(end, 'hh:mm A')}`;
     },
-    addAppointment(popup_info) {
+    addEvent(popup_info) {
       let payload = {
         data: {
           title: this.new_appointment.title,
@@ -226,14 +227,14 @@ export default {
       };
     },
     addManually(payload) {
-      console.log('AddManually payload', payload);
       this.$kalendar.addNewEvent(
         payload,
       );
       this.adding_manually = false;
     },
     removeEvent(kalendarEvent) {
-      let day = kalendarEvent.start_time.toISOString().slice(0, 10);
+      console.log({kalendarEvent});
+      let day = kalendarEvent.start_time.slice(0, 10);
       this.$kalendar.removeEvent({
         day,
         key: kalendarEvent.key,

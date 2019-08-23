@@ -85,7 +85,7 @@ export default {
     },
     hourHeight() {
       return 6 * this.kalendar_options.cell_height;
-      //this.kalendar_options.cell_height * (60 / this.kalendar_options.split_value); 
+      //this.kalendar_options.cell_height * (60 / this.kalendar_options.split_value);
       // * this.kalendar_options.hour_parts;
     },
     passedtime() {
@@ -93,8 +93,6 @@ export default {
       let time = getLocaleTime(now);
       let day_starts = `${time.split('T')[0]}T${(day_starts_at + '').padStart(2,0)}:00:00.000Z`;
       let day_ends = `${time.split('T')[0]}T${(day_ends_at + '').padStart(2,0)}:00:00.000Z`;
-
-      console.log({ day_starts, day_ends, time });
 
       if (new Date(day_ends) - new Date(time) < 0) {
         return null;
@@ -105,9 +103,8 @@ export default {
 
       let label = time.split('T')[1].slice(0, 5);
       if (this.kalendar_options.military_time) {
-        let ampm = formatAMPM(label.split(':')[0]);
+        let ampm = formatAMPM(getLocaleTime(time));
         let ampmlabel = ampm.slice(-2);
-        console.log({ ampm });
       }
       let distance = ((new Date(time) - new Date(day_starts)) / 1000) / 60;
       return { distance, time };
@@ -184,7 +181,6 @@ export default {
         if (day.length > 10) {
           day = day.slice(0, 10);
         }
-        console.log('Options:', options);
         if (!day)
           return Promise.reject('Day wasn\'t provided');
         if (!id)

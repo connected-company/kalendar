@@ -176,7 +176,7 @@ const constructNewEvent = (event) => {
   let eventKey = masked_from.toISOString();
 
   // 1 minute equals 1 pixel in our view. That means we need to find the length
-  // of the event by finding out the difference in minutes 
+  // of the event by finding out the difference in minutes
   const diffInMs = to - from;
   const diffInHrs = Math.floor((diffInMs % 86400000) / 3600000);
   const diffMins = Math.round(((diffInMs % 86400000) % 3600000) / 60000);
@@ -190,8 +190,6 @@ const constructNewEvent = (event) => {
     status: 'completed',
     key: eventKey
   };
-
-  console.log('Constructed event:', constructedEvent);
 
   return constructedEvent;
 }

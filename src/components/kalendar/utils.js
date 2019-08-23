@@ -92,7 +92,7 @@ const getDayDateID = (date) => {
 }
 
 const getLocaleTime = (dateString) => {
-  let [date, hour] = new Date(dateString).toLocaleString('en-GB')
+  let [date, hour] = new Date(dateString);
     .split(', ');
   date = date.split('/').reverse().join('-');
   return `${date}T${hour}.000Z`;

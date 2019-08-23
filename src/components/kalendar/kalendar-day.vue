@@ -1,7 +1,7 @@
 <template>
   <ul style="position: relative;"
       :class="{
-      'is-weekend': isWeekend, 
+      'is-weekend': isWeekend,
       'is-today': isToday,
       'creating': creator.creating || creator.status === 'popup-initiated'
     }"
@@ -129,7 +129,6 @@ export default {
           this.$set(this.day_events, key, [constructed_event]);
         }
         let events = this.$kalendar.getEvents();
-        console.log('Adding event to kalendar', payload);
         events.push({
           ...payload,
           id: constructed_event.id
@@ -210,7 +209,7 @@ export default {
         ...this.validateSelection(payload),
         status: 'creating'
       };
-      if (this.kalendar_options.overlap === false && this.day_events.length > 0) {
+      if (this.kalendar_options.overlap === false && Object.keys(this.day_events).length > 0) {
         let fixedOverlap = this.overlapPolice(payload);
         if (fixedOverlap) {
           this.creator = this.validateSelection(fixedOverlap);
@@ -359,7 +358,6 @@ export default {
     },
     scrollView() {
       let topoffset = this.$refs.nowIndicator.offsetTop;
-      console.log('Scrolling to :', topoffset);
       setTimeout(() => {
         window.scroll({ top: topoffset, left: 0, behavior: 'smooth' });
       }, 500);
