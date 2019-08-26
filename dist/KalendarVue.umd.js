@@ -8148,7 +8148,7 @@ var portal_vue_default = /*#__PURE__*/__webpack_require__.n(portal_vue);
 var smoothscroll = __webpack_require__("7707");
 var smoothscroll_default = /*#__PURE__*/__webpack_require__.n(smoothscroll);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09a70edd-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-container.vue?vue&type=template&id=45c1c2a9&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09a70edd-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-container.vue?vue&type=template&id=1d6ffc29&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"kalendar-wrapper",class:{
           'no-scroll': !_vm.scrollable,
           'gstyle': _vm.kalendar_options.style === 'material_design',
@@ -8157,7 +8157,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/kalendar/kalendar-container.vue?vue&type=template&id=45c1c2a9&
+// CONCATENATED MODULE: ./src/components/kalendar/kalendar-container.vue?vue&type=template&id=1d6ffc29&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -8592,7 +8592,9 @@ var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
       this.$emit('update:configuration', config);
       setTimeout(function () {
         _this6.$kalendar.buildWeek();
-      });
+
+        console.log('updated');
+      }, 500);
     },
     nextWeek: function nextWeek() {
       var _this7 = this;
@@ -8608,7 +8610,9 @@ var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
       this.$emit('update:configuration', config);
       setTimeout(function () {
         _this7.$kalendar.buildWeek();
-      });
+
+        console.log('updated');
+      }, 500);
     },
     getTime: function getTime(date) {
       var dateObj = new Date(date);
