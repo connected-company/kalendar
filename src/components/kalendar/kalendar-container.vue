@@ -302,7 +302,8 @@ export default {
       this.$emit('update:configuration', config);
       setTimeout(() => {
         this.$kalendar.buildWeek();
-    }, 500);
+        console.log('updated')
+      }, 500);
     },
     nextWeek() {
       let { current_day } = this.kalendar_options;
@@ -319,6 +320,7 @@ export default {
       this.$emit('update:configuration', config);
       setTimeout(() => {
         this.$kalendar.buildWeek();
+        console.log('updated')
       }, 500);
     },
     getTime(date) {
