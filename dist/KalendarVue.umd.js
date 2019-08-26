@@ -671,14 +671,76 @@ module.exports = function (index, length) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var core_js_modules_es6_typed_uint8_array__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("34ef");
-/* harmony import */ var core_js_modules_es6_typed_uint8_array__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_typed_uint8_array__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("6b54");
-/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a481");
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("f576");
-/* harmony import */ var core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_string_pad_start__WEBPACK_IMPORTED_MODULE_3__);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithHoles.js
+
+function _arrayWithHoles(arr) {
+  if (is_array_default()(arr)) return arr;
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
+var get_iterator = __webpack_require__("5d73");
+var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArrayLimit.js
+
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = get_iterator_default()(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableRest.js
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.typed.uint8-array.js
+var es6_typed_uint8_array = __webpack_require__("34ef");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
+var es6_regexp_to_string = __webpack_require__("6b54");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.string.pad-start.js
+var es7_string_pad_start = __webpack_require__("f576");
+
+// CONCATENATED MODULE: ./src/components/kalendar/utils.js
+
+
 
 
 
@@ -704,8 +766,8 @@ var getHourlessDate = function getHourlessDate(date_string) {
 
 var getDatelessHour = function getDatelessHour(date_string, military) {
   var time = addTimezoneInfo(date_string);
-  if (military) return getLocaleTime(time).slice(11, 16);
-  return formatAMPM(new Date(getLocaleTime(time)));
+  if (military) return utils_getLocaleTime(time).slice(11, 16);
+  return formatAMPM(new Date(utils_getLocaleTime(time)));
 };
 
 var getYearMonthDay = function getYearMonthDay(date_string) {
@@ -774,8 +836,14 @@ var getDayDateID = function getDayDateID(date) {
   return "".concat(year, "-").concat(month, "-").concat(day);
 };
 
-var getLocaleTime = function getLocaleTime(dateString) {
-  return new Date(dateString).toISOString();
+var utils_getLocaleTime = function getLocaleTime(dateString) {
+  var _toLocaleString$split = new Date(dateString).toLocaleString('en-GB').split(', '),
+      _toLocaleString$split2 = _slicedToArray(_toLocaleString$split, 2),
+      date = _toLocaleString$split2[0],
+      hour = _toLocaleString$split2[1];
+
+  date = date.split('/').reverse().join('-');
+  return "".concat(date, "T").concat(hour, ".000Z");
 };
 
 var addTimezoneInfo = function addTimezoneInfo(ISOdate) {
@@ -785,7 +853,7 @@ var addTimezoneInfo = function addTimezoneInfo(ISOdate) {
 
 var isToday = function isToday(date) {
   if (!date) return;
-  var today = getLocaleTime(new Date()).slice(0, 10);
+  var today = utils_getLocaleTime(new Date()).slice(0, 10);
   return date.slice(0, 10) === today;
 };
 
@@ -806,7 +874,7 @@ var formatAMPM = function formatAMPM(date) {
   return result;
 };
 
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* harmony default export */ var utils = __webpack_exports__["a"] = ({
   addDays: addDays,
   addMinutes: addMinutes,
   addHours: addHours,
@@ -819,7 +887,7 @@ var formatAMPM = function formatAMPM(date) {
   getHourlessDate: getHourlessDate,
   getDatelessHour: getDatelessHour,
   getYearMonthDay: getYearMonthDay,
-  getLocaleTime: getLocaleTime,
+  getLocaleTime: utils_getLocaleTime,
   isToday: isToday,
   isBefore: isBefore,
   isWeekend: isWeekend,
@@ -959,7 +1027,7 @@ var defineProperty = __webpack_require__("bd86");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
 var es6_promise = __webpack_require__("551c");
 
-// EXTERNAL MODULE: ./src/components/kalendar/utils.js
+// EXTERNAL MODULE: ./src/components/kalendar/utils.js + 4 modules
 var utils = __webpack_require__("102f");
 
 // EXTERNAL MODULE: ./src/components/kalendar/workers/index.js
@@ -1503,6 +1571,17 @@ module.exports = {
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_kalendar_day_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_kalendar_day_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_kalendar_day_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "1af6":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
+var $export = __webpack_require__("63b6");
+
+$export($export.S, 'Array', { isArray: __webpack_require__("9003") });
+
 
 /***/ }),
 
@@ -2502,6 +2581,36 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "40c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// getting tag from 19.1.3.6 Object.prototype.toString()
+var cof = __webpack_require__("6b4c");
+var TAG = __webpack_require__("5168")('toStringTag');
+// ES3 wrong here
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (e) { /* empty */ }
+};
+
+module.exports = function (it) {
+  var O, T, B;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+    // builtinTag case
+    : ARG ? cof(O)
+    // ES3 arguments fallback
+    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+
+/***/ }),
+
 /***/ "41a0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2600,6 +2709,16 @@ module.exports = function (bitmap, value) {
     value: value
   };
 };
+
+
+/***/ }),
+
+/***/ "469f":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("6c1c");
+__webpack_require__("1654");
+module.exports = __webpack_require__("7d7b");
 
 
 /***/ }),
@@ -3902,6 +4021,13 @@ module.exports = __webpack_require__("d8d6");
 
 /***/ }),
 
+/***/ "5d73":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("469f");
+
+/***/ }),
+
 /***/ "5df3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4832,6 +4958,35 @@ module.exports = function (KEY) {
 
 /***/ }),
 
+/***/ "7cd6":
+/***/ (function(module, exports, __webpack_require__) {
+
+var classof = __webpack_require__("40c3");
+var ITERATOR = __webpack_require__("5168")('iterator');
+var Iterators = __webpack_require__("481b");
+module.exports = __webpack_require__("584a").getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+
+/***/ }),
+
+/***/ "7d7b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("e4ae");
+var get = __webpack_require__("7cd6");
+module.exports = __webpack_require__("584a").getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
+
+
+/***/ }),
+
 /***/ "7e90":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5221,7 +5376,7 @@ module.exports = function (exec) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function() {
-  return new Worker(__webpack_require__.p + "54fdc426a3eeb17ed069.worker.js");
+  return new Worker(__webpack_require__.p + "e439f8b70d31801337a7.worker.js");
 };
 
 /***/ }),
@@ -5469,6 +5624,13 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
+
+/***/ }),
+
+/***/ "a745":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("f410");
 
 /***/ }),
 
@@ -5866,7 +6028,7 @@ var staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/kalendar/kalendar-event.vue?vue&type=template&id=543cef36&
 
-// EXTERNAL MODULE: ./src/components/kalendar/utils.js
+// EXTERNAL MODULE: ./src/components/kalendar/utils.js + 4 modules
 var utils = __webpack_require__("102f");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-event.vue?vue&type=script&lang=js&
@@ -7500,6 +7662,15 @@ module.exports = function (object, index, value) {
 
 /***/ }),
 
+/***/ "f410":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("1af6");
+module.exports = __webpack_require__("584a").Array.isArray;
+
+
+/***/ }),
+
 /***/ "f576":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7573,7 +7744,7 @@ var kalendar_day = __webpack_require__("1763");
 // EXTERNAL MODULE: ./src/components/kalendar/workers/index.js
 var workers = __webpack_require__("34a4");
 
-// EXTERNAL MODULE: ./src/components/kalendar/utils.js
+// EXTERNAL MODULE: ./src/components/kalendar/utils.js + 4 modules
 var utils = __webpack_require__("102f");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/kalendar/kalendar-weekview.vue?vue&type=script&lang=js&
@@ -8049,7 +8220,7 @@ function typeof_typeof(obj) {
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// EXTERNAL MODULE: ./src/components/kalendar/utils.js
+// EXTERNAL MODULE: ./src/components/kalendar/utils.js + 4 modules
 var utils = __webpack_require__("102f");
 
 // EXTERNAL MODULE: ./src/components/kalendar/workers/index.js
