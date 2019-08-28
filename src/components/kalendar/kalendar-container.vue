@@ -1,8 +1,8 @@
 <template>
   <div class="kalendar-wrapper"
        :class="{
-            'no-scroll': !scrollable, 
-            'gstyle': kalendar_options.style === 'material_design', 
+            'no-scroll': !scrollable,
+            'gstyle': kalendar_options.style === 'material_design',
             'day-view': kalendar_options.view_type === 'day',
     }"
        @touchstart="scrollable = false"
@@ -212,6 +212,9 @@ export default {
         hide_days: val => Array.isArray(val) && !val.find(n => typeof n !== 'number'),
         overlap: val => typeof val === 'boolean',
         past_event_creation: val => typeof val === 'boolean',
+        formatLeftHours: val => typeof val === 'function',
+        formatDayTitle: val => typeof val === 'function',
+        formatWeekNavigator: val => typeof val === 'function'
       };
       for (let key in provided_props) {
         if (conditions.hasOwnProperty(key) && conditions[key](provided_props[key])) {
